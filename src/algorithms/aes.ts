@@ -185,12 +185,12 @@ function invShiftRows(state: number[][]): void {
   state[2][2] = temp2;
   state[2][3] = temp3;
   
-  // Row 3: shift right by 3 (which is equivalent to left shift by 1)
-  const temp4 = state[3][0];
+  // Row 3: shift right by 3
+  const temp4 = state[3][3];
+  state[3][3] = state[3][0];
   state[3][0] = state[3][1];
   state[3][1] = state[3][2];
-  state[3][2] = state[3][3];
-  state[3][3] = temp4;
+  state[3][2] = temp4;
 }
 
 // GF(2^8) multiplication
@@ -347,17 +347,8 @@ export function encryptAES(plaintext: string, key: string, format: string = 'tex
 // Main AES decryption function
 export function decryptAES(ciphertext: string, key: string, format: string = 'text'): string {
   try {
-    console.log("Decryption input:", ciphertext);
-    console.log("Is valid hex?", /^[0-9A-Fa-f]*$/.test(ciphertext));
-    
     const keyBytes = processKey(key, format);
     const expandedKey = keyExpansion(keyBytes);
-    
-    // Make sure ciphertext is in hexadecimal format
-    if (!/^[0-9A-Fa-f]*$/.test(ciphertext)) {
-      throw new Error('AES Decryption requires hexadecimal input');
-    }
-    
     const cipherBytes = hexToBytes(ciphertext);
     
     if (cipherBytes.length % 16 !== 0) {
@@ -386,15 +377,10 @@ export function decryptAES(ciphertext: string, key: string, format: string = 'te
     
     // Remove padding
     const padLength = decryptedBytes[decryptedBytes.length - 1];
-    if (padLength > 0 && padLength <= 16) {
-      const unpaddedBytes = decryptedBytes.slice(0, -padLength);
-      return bytesToString(unpaddedBytes);
-    } else {
-      // In case the padding is invalid, return the full result
-      return bytesToString(decryptedBytes);
-    }
+    const unpaddedBytes = decryptedBytes.slice(0, -padLength);
+    
+    return bytesToString(unpaddedBytes);
   } catch (e) {
-    console.error("AES Decryption error details:", e);
     throw new Error(`AES Decryption error: ${e instanceof Error ? e.message : String(e)}`);
   }
 }

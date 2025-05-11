@@ -32,7 +32,7 @@ export function encryptVigenere(plaintext: string, key: string): string {
   if (normalizedKey.length === 0) {
     throw new Error('Vigenère encryption key must contain at least one letter');
   }
-  
+
   let result = '';
   
   // Encrypt each character

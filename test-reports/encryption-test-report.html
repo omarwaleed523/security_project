@@ -1,0 +1,171 @@
+
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <title>Encryption Algorithm Test Report</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 20px; }
+      table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+      th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+      th { background-color: #4CAF50; color: white; }
+      tr:nth-child(even) { background-color: #f2f2f2; }
+      .pass { color: green; font-weight: bold; }
+      .fail { color: red; font-weight: bold; }
+      .summary { margin-top: 20px; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <h1>Encryption Algorithm Test Report</h1>
+    <div class="summary">
+      <p>Total Tests: 12</p>
+      <p>Passed: <span class="pass">11</span></p>
+      <p>Failed: <span class="fail">1</span></p>
+    </div>
+    <table>
+      <tr>
+        <th>No.</th>
+        <th>TC ID</th>
+        <th>TEST SCENARIO</th>
+        <th>PRE CONDITION</th>
+        <th>POST CONDITION</th>
+        <th>PRIORITY</th>
+        <th>STATUS</th>
+        <th>COMMENTS</th>
+      </tr>
+  
+      <tr>
+        <td>1</td>
+        <td>TAES-001</td>
+        <td>Test basic AES encryption and decryption with text key</td>
+        <td>Valid text input and encryption key</td>
+        <td>Input text is encrypted and then successfully decrypted back to original</td>
+        <td>High</td>
+        <td class="pass">PASS</td>
+        <td>Core encryption/decryption functionality test</td>
+      </tr>
+    
+      <tr>
+        <td>2</td>
+        <td>TAES-002</td>
+        <td>Verify using a hexadecimal key correctly encrypts and decrypts data</td>
+        <td>Valid input text and hexadecimal encryption key</td>
+        <td>Input text is encrypted with hex key and successfully decrypted</td>
+        <td>Medium</td>
+        <td class="pass">PASS</td>
+        <td>Tests alternative key format functionality</td>
+      </tr>
+    
+      <tr>
+        <td>3</td>
+        <td>TAES-003</td>
+        <td>Test handling of short and long encryption keys</td>
+        <td>Encryption keys shorter and longer than ideal 16 bytes</td>
+        <td>Keys are properly padded or truncated and encryption works correctly</td>
+        <td>High</td>
+        <td class="fail">FAIL</td>
+        <td>Validates key preprocessing functionality - FAILED: Key length handling failed: Short key: false, Long key: false</td>
+      </tr>
+    
+      <tr>
+        <td>4</td>
+        <td>TAES-004</td>
+        <td>Test encryption and decryption with empty input</td>
+        <td>Empty input string</td>
+        <td>Function handles empty input gracefully without errors</td>
+        <td>Medium</td>
+        <td class="pass">PASS</td>
+        <td>Robustness test for edge cases</td>
+      </tr>
+    
+      <tr>
+        <td>5</td>
+        <td>TAUT-001</td>
+        <td>Test basic autokey encryption and decryption with a simple key</td>
+        <td>Valid text input and alphabetic encryption key</td>
+        <td>Input text is encrypted and successfully decrypted back to original</td>
+        <td>High</td>
+        <td class="pass">PASS</td>
+        <td>Core functionality test</td>
+      </tr>
+    
+      <tr>
+        <td>6</td>
+        <td>TAUT-002</td>
+        <td>Verify autokey works with mixed case and normalizes properly</td>
+        <td>Mixed case input text with special characters</td>
+        <td>Text is normalized and properly encrypted/decrypted</td>
+        <td>Medium</td>
+        <td class="pass">PASS</td>
+        <td>Tests text normalization behavior</td>
+      </tr>
+    
+      <tr>
+        <td>7</td>
+        <td>TAUT-003</td>
+        <td>Ensure autokey properly handles empty inputs</td>
+        <td>Empty input string or empty key</td>
+        <td>Empty input returns empty output, empty key throws error</td>
+        <td>Medium</td>
+        <td class="pass">PASS</td>
+        <td>Tests edge case handling</td>
+      </tr>
+    
+      <tr>
+        <td>8</td>
+        <td>TAUT-004</td>
+        <td>Test encryption of longer text passages</td>
+        <td>Long input text with a short key</td>
+        <td>Long text is correctly encrypted and decrypted</td>
+        <td>Low</td>
+        <td class="pass">PASS</td>
+        <td>Tests performance with larger inputs</td>
+      </tr>
+    
+      <tr>
+        <td>9</td>
+        <td>TVIG-001</td>
+        <td>Test basic Vigenère encryption and decryption with a simple key</td>
+        <td>Valid text input and alphabetic encryption key</td>
+        <td>Input text is encrypted and successfully decrypted back to original</td>
+        <td>High</td>
+        <td class="pass">PASS</td>
+        <td>Core functionality test</td>
+      </tr>
+    
+      <tr>
+        <td>10</td>
+        <td>TVIG-002</td>
+        <td>Verify Vigenère correctly repeats the key for longer plaintext</td>
+        <td>Long input text with short key that needs to repeat</td>
+        <td>Text is properly encrypted with repeating key and then decrypted</td>
+        <td>Medium</td>
+        <td class="pass">PASS</td>
+        <td>Tests key repetition behavior</td>
+      </tr>
+    
+      <tr>
+        <td>11</td>
+        <td>TVIG-003</td>
+        <td>Ensure Vigenère properly filters non-alphabetic characters</td>
+        <td>Input text with mixed alphanumeric and special characters</td>
+        <td>Non-alphabetic characters are correctly filtered during encryption</td>
+        <td>Medium</td>
+        <td class="pass">PASS</td>
+        <td>Tests text normalization behavior</td>
+      </tr>
+    
+      <tr>
+        <td>12</td>
+        <td>TVIG-004</td>
+        <td>Test empty input and empty key handling</td>
+        <td>Empty input string or empty key</td>
+        <td>Empty input returns empty output, empty key throws error</td>
+        <td>Low</td>
+        <td class="pass">PASS</td>
+        <td>Tests edge case handling</td>
+      </tr>
+    
+    </table>
+  </body>
+  </html>
+  
